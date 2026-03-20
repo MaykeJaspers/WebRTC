@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 1.25rem;
   background: #111827;
   color: white;
 }
@@ -14,21 +14,21 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  margin-top: 30px;
+  gap: 1rem;
+  margin-top: 1.875rem;
 }
 
 .middle-row {
   display: flex;
-  gap: 16px;
+  gap: 1rem;
 }
 
 button {
-  width: 100px;
-  height: 70px;
-  font-size: 24px;
+  width: 6.25rem;
+  height: 4.375rem;
+  font-size: 1.5rem;
   border: none;
-  border-radius: 12px;
+  border-radius: .75rem;
   background: #374151;
   color: white;
 }
@@ -40,13 +40,113 @@ button:active {
 
 #game {
   display: block;
-  margin-top: 20px;
+  margin-top: 1.25rem;
   background: #050816;
-  border: 2px solid #374151;
-  border-radius: 12px;
+  border: 2px solid #f5f9ff;
+  border-radius: .75rem;
   max-width: 100%;
 }
 
 #qr {
-  margin-top: 20px;
+  margin-top: 1.25rem;
+}
+
+
+.dekstop-actions{
+    margin-top: 1rem;
+}
+
+
+#restart{
+    width: auto;
+    height: auto;
+    padding: .75rem 1.125rem;
+    font-size: 1rem;
+}
+
+#qr img{
+    margin-top: 1rem;
+    max-width: 13.75rem;
+    height: auto;
+}
+
+
+/* ===== CONTROLLER STYLING ONLY ===== */
+
+.controller-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* status box */
+.controller-container .status-box {
+  background: rgba(255, 255, 255, 0.06);
+  padding: .625rem 1.125rem;
+  border-radius: .625rem;
+  text-align: center;
+  font-size: .875rem;
+}
+
+/* grid layout */
+.controller-container .controller-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.125rem;
+}
+
+/* middle row */
+.controller-container .middle-row {
+  display: flex;
+  gap: 1.125rem;
+}
+
+/* buttons base */
+.controller-container .btn {
+  border: none;
+  border-radius: 1.125rem;
+  color: white;
+  font-size: 1.875rem;
+  font-weight: bold;
+  touch-action: manipulation;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  transition: all 0.12s ease;
+}
+
+/* direction buttons */
+.controller-container .direction {
+  width: 5.625rem;
+  height: 5.625rem;
+  background: linear-gradient(145deg, #374151, #1f2937);
+}
+
+/* shoot button */
+.controller-container .action {
+  width: 6.25rem;
+  height: 6.25rem;
+  background: linear-gradient(145deg, #ef4444, #991b1b);
+}
+
+/* press feedback */
+.controller-container .btn:active {
+  transform: scale(0.92);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* mobile sizing */
+@media (max-width: 500px) {
+  .controller-container .direction {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .controller-container .action {
+    width: 5.625rem;
+    height: 5.625rem;
+  }
 }

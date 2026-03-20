@@ -1,32 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Controller</title>
+    <link rel="stylesheet" href="/style.css" />
 </head>
 
 <body>
-    <h1>Controller</h1>
+    <div class="controller-container">
+        <h1>Controller</h1>
 
-    <p>Session: <span id="session"></span></p>
-    <p>Status: <span id="status">Connecting...</span></p>
-
-
-    <div class="controls">
-        <button id="up">↑</button>
-
-        <div class="middle-row">
-            <button id="left">←</button>
-            <button id="shoot">shoot</button>
-            <button id="right">→</button>
+        <div class="status-box">
+            <p>Session: <span id="session"></span></p>
+            <p>Status: <span id="status">Connecting...</span></p>
         </div>
 
-        <button id="down">↓</button>
+        <div class="controller-grid">
+            <button id="up" class="btn direction">↑</button>
 
+            <div class="middle-row">
+                <button id="left" class="btn direction">←</button>
+                <button id="shoot" class="btn action">●</button>
+                <button id="right" class="btn direction">→</button>
+            </div>
+
+            <button id="down" class="btn direction">↓</button>
+        </div>
     </div>
-
 
     <script src="/js/controller.js"></script>
 </body>
