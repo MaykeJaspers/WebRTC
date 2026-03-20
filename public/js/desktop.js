@@ -25,9 +25,10 @@ ws.onopen = async () => {
     console.log("Data channel open");
   };
 
-  dataChannel.onmessage = (event) => {
-    console.log("Received:", event.data);
-  };
+ dataChannel.onmessage = (event) => {
+  const message = JSON.parse(event.data);
+  console.log("Received control:", message);
+};
 
   pc.onicecandidate = (event) => {
     if (event.candidate) {

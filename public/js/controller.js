@@ -24,12 +24,13 @@ ws.onopen = () => {
 
     channel.onopen = () => {
       console.log("Connected to data channel");
-      channel.send("hello from phone");
     };
 
     channel.onmessage = (event) => {
       console.log("Message from desktop:", event.data);
     };
+
+    setupControls();
   };
 
   pc.onicecandidate = (event) => {
@@ -72,3 +73,59 @@ ws.onmessage = async (msg) => {
     await pc.addIceCandidate(data.candidate);
   }
 };
+
+function sendControl(action, state = "press") {
+  if (!channel || channel.readyState !== "open") return;
+
+  const message = {
+    type: "control",
+    action,
+    state
+  };
+
+  channel.send(JSON.stringify(message));
+}
+
+function bindHoldButton(buttonId, action) {
+  const button = document.getElementById(buttonId);
+
+  button.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    sendControl(action, "down");
+  });
+
+  button.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    sendControl(action, "up");
+  });
+
+  button.addEventListener("mousedown", () => {
+    sendControl(action, "down");
+  });
+
+  button.addEventListener("mouseup", () => {
+    sendControl(action, "up");
+  });
+
+  button.addEventListener("mouseleave", () => {
+    sendControl(action, "up");
+  });
+}
+
+function setupControls() {
+  bindHoldButton("up", "up");
+  bindHoldButton("down", "down");
+  bindHoldButton("left", "left");
+  bindHoldButton("right", "right");
+
+  const shootButton = document.getElementById("shoot");
+
+  shootButton.addEventListener("click", () => {
+    sendControl("shoot", "press");
+  });
+
+  shootButton.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    sendControl("shoot", "press");
+  });
+}
