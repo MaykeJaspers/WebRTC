@@ -36,3 +36,17 @@ button {
 button:active {
   background: #4b5563;
 }
+
+
+#game {
+  display: block;
+  margin-top: 20px;
+  background: #050816;
+  border: 2px solid #374151;
+  border-radius: 12px;
+  max-width: 100%;
+}
+
+#qr {
+  margin-top: 20px;
+}
