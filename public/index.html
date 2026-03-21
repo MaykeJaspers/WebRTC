@@ -1,27 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Desktop</title>
+    <title>Space Dodger</title>
     <link rel="stylesheet" href="/style.css" />
 </head>
 
 <body>
-    <h1>Space dodger</h1>
+    <main class="desktop-page">
+        <section class="desktop-shell">
+            <header class="hero">
+                <h1>Space Dodger</h1>
+                <p class="subtitle">Use your phone as a controller and survive the asteroid field.</p>
+            </header>
 
-    <p>Session: <span id="session"></span></p>
-    <p>Status: <span id="status">Waiting...</span></p>
+            <section class="info-bar">
+                <div class="info-card">
+                    <span class="label">Session</span>
+                    <span id="session" class="value"></span>
+                </div>
 
-    <canvas id="game" width="800" height="500"></canvas>
+                <div class="info-card">
+                    <span class="label">Status</span>
+                    <span id="status" class="value">Waiting for controller...</span>
+                </div>
+            </section>
 
+            <section id="startScreen" class="panel start-panel">
+                <p class="start-text">Scan the QR code with your phone to connect your controller.</p>
+                <div id="qr"></div>
+                <button id="startGame" disabled>Start Game</button>
+            </section>
 
-    <div class="desktop-actions">
-        <button id="restart">Restart Game</button>
-    </div>
+            <section class="panel game-panel">
+                <canvas id="game" width="800" height="500"></canvas>
 
-    <div id="qr"></div>
+                <div class="desktop-actions">
+                    <button id="restart">Restart Game</button>
+                </div>
+            </section>
+        </section>
+    </main>
 
     <script src="/js/desktop.js"></script>
 </body>

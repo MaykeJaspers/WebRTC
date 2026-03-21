@@ -5,11 +5,10 @@ const session = location.pathname.split("/").pop();
 
 document.getElementById("session").textContent = session;
 
-const ws = new WebSocket(`ws://192.168.0.224:3000`);
+const protocol = location.protocol === "https:" ? "wss" : "ws";
+const ws = new WebSocket(`${protocol}://${location.host}`);
 
 ws.onopen = () => {
-  console.log("Phone WS open");
-
   ws.send(JSON.stringify({
     type: "join",
     sessionId: session,
@@ -19,7 +18,6 @@ ws.onopen = () => {
   pc = new RTCPeerConnection();
 
   pc.ondatachannel = (event) => {
-    console.log("Phone received data channel");
     channel = event.channel;
 
     channel.onopen = () => {
@@ -35,7 +33,6 @@ ws.onopen = () => {
 
   pc.onicecandidate = (event) => {
     if (event.candidate) {
-      console.log("Phone sending candidate");
       ws.send(JSON.stringify({
         type: "candidate",
         candidate: event.candidate
@@ -46,7 +43,6 @@ ws.onopen = () => {
 
 ws.onmessage = async (msg) => {
   const data = JSON.parse(msg.data);
-  console.log("Phone got:", data.type);
 
   if (data.type === "status") {
     document.getElementById("status").textContent =
@@ -54,22 +50,18 @@ ws.onmessage = async (msg) => {
   }
 
   if (data.type === "offer") {
-    console.log("Phone setting remote offer");
     await pc.setRemoteDescription(data.offer);
 
-    console.log("Phone creating answer");
     const answer = await pc.createAnswer();
     await pc.setLocalDescription(answer);
 
-    console.log("Phone sending answer");
     ws.send(JSON.stringify({
       type: "answer",
-      answer: answer
+      answer
     }));
   }
 
   if (data.type === "candidate") {
-    console.log("Phone adding candidate");
     await pc.addIceCandidate(data.candidate);
   }
 };
